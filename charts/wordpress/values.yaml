@@ -93,7 +93,7 @@ image:
 
 ## @param wordpressUsername WordPress username
 ##
-wordpressUsername: user
+wordpressUsername: wordpress
 ## @param wordpressPassword WordPress user password
 ## Defaults to a random 10-character alphanumeric string if not set
 ##
@@ -120,7 +120,7 @@ wordpressBlogName: User's Blog!
 wordpressTablePrefix: wp_
 ## @param wordpressScheme Scheme to use to generate WordPress URLs
 ##
-wordpressScheme: http
+wordpressScheme: https
 ## @param wordpressSkipInstall Skip wizard installation
 ## NOTE: useful if you use an external database that already contains WordPress data
 ## ref: https://github.com/bitnami/bitnami-docker-wordpress#connect-wordpress-docker-container-to-an-existing-database
@@ -511,7 +511,7 @@ lifecycleHooks: {}
 service:
   ## @param service.type WordPress service type
   ##
-  type: LoadBalancer
+  type: ClusterIP
   ## @param service.ports.http WordPress service HTTP port
   ## @param service.ports.https WordPress service HTTPS port
   ##
@@ -566,7 +566,7 @@ service:
 ingress:
   ## @param ingress.enabled Enable ingress record generation for WordPress
   ##
-  enabled: false
+  enabled: true
   ## @param ingress.pathType Ingress path type
   ##
   pathType: ImplementationSpecific
@@ -672,13 +672,13 @@ persistence:
   ## @param persistence.accessModes [array] Persistent Volume access modes
   ##
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   ## @param persistence.accessMode Persistent Volume access mode (DEPRECATED: use `persistence.accessModes` instead)
   ##
-  accessMode: ReadWriteOnce
+  accessMode: ReadWriteMany
   ## @param persistence.size Persistent Volume size
   ##
-  size: 10Gi
+  size: 5Gi
   ## @param persistence.dataSource Custom PVC data source
   ##
   dataSource: {}
@@ -1062,8 +1062,8 @@ mariadb:
       enabled: true
       storageClass: ""
       accessModes:
-        - ReadWriteOnce
-      size: 8Gi
+        - ReadWriteMany
+      size: 5Gi
 ## External Database Configuration
 ## All of these values are only used if `mariadb.enabled=false`
 ##
