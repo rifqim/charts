@@ -20,8 +20,8 @@ spec:
   ingressClassName: {{ .Values.ingress.ingressClassName | quote }}
   {{- end }}
   rules:
-    {{- if .Release.Namespace }}
-    - host: "{{ .Release.Namespace | quote }}".apps.k8s.arch.biznetgio.xyz
+    {{- if $.Release.Namespace }}
+    - host: {{ $.Release.Namespace | quote }}.{{ .Values.ingress.customDomain }}
       http:
         paths:
           {{- if .Values.ingress.extraPaths }}
@@ -47,8 +47,8 @@ spec:
   tls:
     {{- if and .Values.ingress.tls (or (include "wordpress.ingress.certManagerRequest" .Values.ingress.annotations) .Values.ingress.selfSigned) }}
     - hosts:
-        - {{ .Release.Namespace | quote }}
-      secretName: {{ printf "%s-tls" .Release.Namespace }}
+        - {{ $.Release.Namespace | quote }}
+      secretName: {{ printf "%s-tls" $.Release.Namespace }}
     {{- end }}
     {{- if .Values.ingress.extraTls }}
     {{- include "common.tplvalues.render" (dict "value" .Values.ingress.extraTls "context" $) | nindent 4 }}
