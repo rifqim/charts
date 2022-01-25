@@ -20,8 +20,8 @@ spec:
   ingressClassName: {{ .Values.ingress.ingressClassName | quote }}
   {{- end }}
   rules:
-    {{- if .Release.Namespace }}
-    - host: {{ .Release.Namespace | quote }}
+    {{- if $.Release.Namespace }}
+    - host: {{ $.Release.Namespace | quote }}
       http:
         paths:
           {{- if .Values.ingress.extraPaths }}
