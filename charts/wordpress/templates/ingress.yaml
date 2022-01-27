@@ -21,7 +21,7 @@ spec:
   {{- end }}
   rules:
     {{- if .Values.ingress.hostname }}
-    - host: '"{{ $.Release.Name | quote }}".apps.k8s.arch.biznetgio.xyz'
+    - host: {{ $.Release.Name | quote }}'.apps.k8s.arch.biznetgio.xyz'
       http:
         paths:
           {{- if .Values.ingress.extraPaths }}
