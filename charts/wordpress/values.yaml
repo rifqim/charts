@@ -678,7 +678,7 @@ persistence:
   accessMode: ReadWriteMany
   ## @param persistence.size Persistent Volume size
   ##
-  size: 5Gi
+  size: 1Gi
   ## @param persistence.dataSource Custom PVC data source
   ##
   dataSource: {}
@@ -1063,7 +1063,7 @@ mariadb:
       storageClass: ""
       accessModes:
         - ReadWriteMany
-      size: 5Gi
+      size: 1Gi
 ## External Database Configuration
 ## All of these values are only used if `mariadb.enabled=false`
 ##
